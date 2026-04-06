@@ -1,0 +1,95 @@
+import java.util.*;
+class Node 
+{
+    Node prev;
+    int data;
+    Node next;
+}
+class DLL 
+{
+    Node head,tail,newNode,left,temp;
+    void insertion(int num)
+    {
+        Node newNode = new Node();
+        newNode.prev=null;
+        newNode.data=num;
+        newNode.next=null;
+        if(head==null)
+        {
+            head=tail=newNode;
+        }
+        else 
+        {
+            tail.next=newNode;
+            newNode.prev=tail;
+            tail=newNode;
+        }
+    }
+    void display()
+    {
+        temp=head;
+        while(temp.next!=null)
+        {
+            System.out.print(temp.data+" ");
+            temp=temp.next;
+        }
+        System.out.print(temp.data);
+    }
+    void insertion_at_starting(int A)
+    {
+        Node newNode = new Node();
+        newNode.prev=null;
+        newNode.data=A;
+        newNode.next=head;
+        head.prev=newNode;
+        head=newNode;
+    }
+    void insertion_at_ending(int B)
+    {
+        Node newNode = new Node();
+        newNode.prev=null;
+        newNode.data=B;
+        newNode.next=null;
+        tail.next=newNode;
+        newNode.prev=tail;
+        tail=newNode;
+    }
+    void insertion_at_postion(int C,int pos)
+    {
+        Node newNode = new Node();
+        newNode.prev=null;
+        newNode.data=C;
+        newNode.next=null;
+        int itr=1;
+        temp=head;
+        while(itr<=pos)
+        {
+            left=temp;
+            temp=temp.next;
+            itr++;
+        }
+        left.next=newNode;
+        newNode.next=temp;
+        temp.prev=newNode;
+        newNode.prev=left;
+    }
+    public static void main(String [] args)
+    {
+        Scanner sc = new Scanner(System.in);
+        DLL dll =new DLL ();
+        int size=sc.nextInt();
+        for(int i=1;i<=size;i++)
+        {
+            int num=sc.nextInt();
+            dll.insertion(num);
+        }
+        int A=sc.nextInt();
+        dll.insertion_at_starting(A);
+        int B=sc.nextInt();
+        dll.insertion_at_ending(B);
+        int C=sc.nextInt();
+        int pos=sc.nextInt();
+        dll.insertion_at_postion(B,pos);
+        dll.display();
+    }
+}
